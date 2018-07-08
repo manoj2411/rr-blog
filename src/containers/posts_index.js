@@ -11,6 +11,10 @@ class PostsIndex extends React.Component {
   }
 
   renderPosts(){
+    if (_.isEmpty(this.props.posts)) {
+      return <span> loading... </span>;
+    }
+
     return _.map(this.props.posts, post => (
       <li key={post.id} className="list-group-item">
         {post.title}
