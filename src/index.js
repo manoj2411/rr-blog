@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxPromise from 'redux-promise';
 
-import PostsIndex from './components/posts_index';
+import PostsIndex from './containers/posts_index';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = compose(applyMiddleware(ReduxPromise),
