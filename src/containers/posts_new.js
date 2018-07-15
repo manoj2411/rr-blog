@@ -1,8 +1,16 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createPost } from '../actions'
 
 class PostsNew extends React.Component {
+  constructor(props) {
+    super(props)
+    this.submitForm = this.submitForm.bind(this);
+  }
+
   renderField(field) {
     const {meta: {touched, invalid, error}} = field;
     const classNames = `form-group ${touched && invalid ? 'has-danger' : '' }`;
@@ -24,6 +32,7 @@ class PostsNew extends React.Component {
   submitForm(values) {
     console.log('submitForm - ');
     console.log(values)
+    this.props.createPost(values)
   }
 
   render() {
@@ -72,5 +81,11 @@ function validate(values) {
 
   return errors;
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({createPost}, dispatch)
+}
+
+PostsNew = connect(null, mapDispatchToProps)(PostsNew)
 
 export default reduxForm({ form: 'PostNewForm', validate})(PostsNew)
